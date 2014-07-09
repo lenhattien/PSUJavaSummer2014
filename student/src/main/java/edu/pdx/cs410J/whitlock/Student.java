@@ -51,11 +51,12 @@ public class Student extends Human {
    */
   public static void main(String[] args) {
       if (args.length < 6){
-          System.err.println("Not enough command line arguments");
-          System.err.println("");
-          System.err.println(USAGE);
+        System.err.println("Not enough command line arguments");
+        System.err.println("");
+        System.err.println(USAGE);
+        System.exit(1);
       }
 
-    System.exit(1);
+    System.exit(0);
   }
 }
