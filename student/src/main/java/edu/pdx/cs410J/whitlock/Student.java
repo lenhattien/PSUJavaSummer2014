@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class Student extends Human {
 
   public static final String USAGE = "usage: java edu.pdx.cs401J.whitlock.Student name gender age class*";
+  public static final String INVALID_GPA = "GPA must be a number between 0.0 and 4.0";
+  public static final String INVALID_GENDER = "Invalid gender";
 
   /**
    * Creates a new <code>Student</code>                                             
@@ -48,20 +50,55 @@ public class Student extends Human {
    * Main program that parses the command line, creates a
    * <code>Student</code>, and prints a description of the student to
    * standard out by invoking its <code>toString</code> method.
+   *
+   * @param args command line arguments
    */
   public static void main(String[] args) {
       if (args.length < 6) {
-        System.err.println("Not enough command line arguments");
-        System.err.println("");
-        System.err.println(USAGE);
-        System.exit(1);
+        printUsageAndExit("Not enough command line arguments");
       }
 
-    String gender = args[1];
-    if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")) {
-      System.err.println("Invalid gender");
-      System.exit(1);
-    }
+    String gender = validateGender(args[1]);
+
+    double gpa = validateGpa(args[2]);
+
     System.exit(0);
+  }
+
+  /**
+   * Validate that a gpa is a valid double. If <code>arg</code> is not a valid double,
+   * the program exits with error code 1
+   * @param args The string to parse
+   * @return The parsed value of double
+   */
+  private static double validateGpa(String args) {
+    double gpa;
+    try {
+      gpa = Double.parseDouble(args);
+
+    } catch (NumberFormatException ex) {
+      String errorMessage = INVALID_GPA;
+      printUsageAndExit(errorMessage);
+
+      throw new AssertionError("Should never get here");
+    }
+
+    return gpa;
+  }
+
+  private static void printUsageAndExit(String errorMessage) {
+    System.err.println(errorMessage);
+    System.err.println();
+    System.err.println(USAGE);
+
+    System.exit(1);
+  }
+
+  private static String validateGender(String gender) {
+    if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")) {
+      printUsageAndExit(INVALID_GENDER);
+    }
+
+    return gender;
   }
 }

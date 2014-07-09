@@ -4,6 +4,7 @@ import edu.pdx.cs410J.InvokeMainTestCase;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static edu.pdx.cs410J.whitlock.Student.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.StringContains.containsString;
@@ -16,6 +17,8 @@ import static org.hamcrest.core.StringContains.containsString;
  */
 public class StudentTest extends InvokeMainTestCase
 {
+
+
 
   @Test
   public void invokingMainWithNoArgumentsHasExitCodeOf1() {
@@ -36,6 +39,7 @@ public class StudentTest extends InvokeMainTestCase
   private void assertThatStandardErrorContains(String errorMessage, String... args) {
     MainMethodResult result = invokeStudentMain(args);
     assertThat(result.getErr(), containsString(errorMessage));
+    assertThat(result.getExitCode(), equalTo(1));
   }
 
   @Test
@@ -47,7 +51,7 @@ public class StudentTest extends InvokeMainTestCase
 
   @Test
   public void whenArgumentsAreMissingUsageMessageIsPrintedToStandardError() {
-    assertThatStandardErrorContains(Student.USAGE);
+    assertThatStandardErrorContains(USAGE);
   }
 
   @Test
@@ -99,15 +103,17 @@ public class StudentTest extends InvokeMainTestCase
 
   @Test
   public void whenGenderIsNeitherMaleNorFemaleErrorMessageIsIssued() {
-    String errorMessage = "Invalid gender";
+    String errorMessage = INVALID_GENDER;
     assertThatStandardErrorContains(errorMessage, "name", "invalid", "3", "4", "5", "6");
   }
 
 
 
-  @Ignore
+
   @Test
   public void whenGpaIsNotDoublePrintErrorMessage() {
+    String errorMessage = INVALID_GPA; //alt + return: static import
+    assertThatStandardErrorContains(errorMessage, "name", "female", "three-point-five", "4", "5", "6");
 
   }
 
