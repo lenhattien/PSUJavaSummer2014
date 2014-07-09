@@ -50,13 +50,18 @@ public class Student extends Human {
    * standard out by invoking its <code>toString</code> method.
    */
   public static void main(String[] args) {
-      if (args.length < 6){
+      if (args.length < 6) {
         System.err.println("Not enough command line arguments");
         System.err.println("");
         System.err.println(USAGE);
         System.exit(1);
       }
 
+    String gender = args[1];
+    if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")) {
+      System.err.println("Invalid gender");
+      System.exit(1);
+    }
     System.exit(0);
   }
 }

@@ -57,9 +57,53 @@ public class StudentTest extends InvokeMainTestCase
       oneThousandArguments[i] = String.valueOf(i);
     }
 
-    MainMethodResult result = invokeStudentMain(oneThousandArguments);
+    oneThousandArguments[0] = "Name";
+    oneThousandArguments[1] = "female";
+
+    assertThatArgumentsAreValid(oneThousandArguments);
+  }
+
+
+  @Test
+  public void nameWithNonAsciiCharactersIsValid() {
+    assertThatArgumentsAreValid("H\u00E4ns", "male", "3", "4", "5", "6");
+
+
+  }
+
+  private void assertThatArgumentsAreValid(String... args) {
+    MainMethodResult result = invokeStudentMain(args);
     assertThat(result.getExitCode(), equalTo(0));
   }
+
+
+  @Test
+  public void whenGenderIsMaleExitCodeIsZero() {
+    assertThatArgumentsAreValid("name", "male", "3", "4", "5", "6");
+  }
+
+  @Test
+  public void whenGenderIsFemaleExitCodeIsZero() {
+    assertThatArgumentsAreValid("name", "female", "3", "4", "5", "6");
+  }
+
+  @Test
+  public void caseInsensitiveMaleGenderIsValid() {
+    assertThatArgumentsAreValid("name", "MaLe", "3", "4", "5", "6");
+  }
+
+  @Test
+  public void caseInsensitiveFemaleGenderIsValid() {
+    assertThatArgumentsAreValid("name", "FeMaLe", "3", "4", "5", "6");
+  }
+
+  @Test
+  public void whenGenderIsNeitherMaleNorFemaleErrorMessageIsIssued() {
+    String errorMessage = "Invalid gender";
+    assertThatStandardErrorContains(errorMessage, "name", "invalid", "3", "4", "5", "6");
+  }
+
+
 
   @Ignore
   @Test
