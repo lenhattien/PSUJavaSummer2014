@@ -117,15 +117,15 @@ public class StudentTest extends InvokeMainTestCase
 
   }
 
-  @Ignore
   @Test
   public void whenGpaIsLessThanZeroPrintErrorMessage() {
-
+    String errorMessage = INVALID_GPA; //alt + return: static import
+    assertThatStandardErrorContains(errorMessage, "name", "female", "-1.0", "4", "5", "6");
   }
 
-  @Ignore
   @Test
   public void whenGpaIsGreaterThanFourPrintErrorMessage() {
-
-}
+    String errorMessage = INVALID_GPA; //alt + return: static import
+    assertThatStandardErrorContains(errorMessage, "name", "female", "5.0", "4", "5", "6");
+  }
 }
