@@ -3,6 +3,7 @@ package edu.pdx.cs410J.whitlock;
 import edu.pdx.cs410J.lang.Human;
 
 import java.util.ArrayList;
+import java.util.List;
                                                                                     
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
@@ -12,6 +13,10 @@ public class Student extends Human {
   public static final String USAGE = "usage: java edu.pdx.cs401J.whitlock.Student name gender age class*";
   public static final String INVALID_GPA = "GPA must be a number between 0.0 and 4.0";
   public static final String INVALID_GENDER = "Invalid gender";
+
+  private final List classes;
+  private double gpa;
+  private String gender;
 
   /**
    * Creates a new <code>Student</code>                                             
@@ -28,6 +33,10 @@ public class Student extends Human {
    */                                                                               
   public Student(String name, ArrayList classes, double gpa, String gender) {
     super(name);
+
+    this.classes = classes;
+    this.gpa = gpa;
+    this.gender = gender;
   }
 
   /**                                                                               
@@ -35,7 +44,7 @@ public class Student extends Human {
    */
   @Override
   public String says() {                                                            
-    return null;
+    return "This class is too much work" ;
   }
                                                                                     
   /**                                                                               
@@ -43,7 +52,19 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    return null;
+    return getName() + "has a GPA of " + getGpa() + " and is taking " + formatClasses().size() +
+      " classes: " + formatClasses() + ". " + getGenderPronoun() + " says \"" + says() + "\".";
+  }
+
+  private String formatClasses() {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < this.classes.size(); i++) {
+      sb.append(this.classes.get(i));
+      if (i < this.classes.size() - 1){
+        sb.append(", ");
+      }
+    }
+    return sb.toString();
   }
 
   /**
@@ -54,13 +75,17 @@ public class Student extends Human {
    * @param args command line arguments
    */
   public static void main(String[] args) {
-      if (args.length < 6) {
+      if (args.length < 3) {
         printUsageAndExit("Not enough command line arguments");
       }
 
+    String name = args[0];
     String gender = validateGender(args[1]);
-
     double gpa = validateGpa(args[2]);
+    ArrayList classes = new ArrayList();
+
+    Student student = new Student(name, classes, gpa, gender);
+    System.out.println(student.toString());
 
     System.exit(0);
   }
@@ -103,5 +128,17 @@ public class Student extends Human {
     }
 
     return gender;
+  }
+
+  public double getGpa() {
+    return gpa;
+  }
+
+  public String getGenderPronoun() {
+    if (gender.equalsIgnoreCase("male")) {
+      return "He";
+    }else {
+      return "She";
+    }
   }
 }

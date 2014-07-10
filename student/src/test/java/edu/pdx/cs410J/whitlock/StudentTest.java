@@ -77,7 +77,7 @@ public class StudentTest extends InvokeMainTestCase
 
   private void assertThatArgumentsAreValid(String... args) {
     MainMethodResult result = invokeStudentMain(args);
-    assertThat(result.getExitCode(), equalTo(0));
+    assertThat(result.getErr(), result.getExitCode(), equalTo(0));
   }
 
 
@@ -127,5 +127,18 @@ public class StudentTest extends InvokeMainTestCase
   public void whenGpaIsGreaterThanFourPrintErrorMessage() {
     String errorMessage = INVALID_GPA; //alt + return: static import
     assertThatStandardErrorContains(errorMessage, "name", "female", "5.0", "4", "5", "6");
+  }
+
+  @Test
+  public void zeroClassesIsValid () {
+    assertThatArgumentsAreValid("name", "male", "3.5");
+  }
+
+  @Test
+  public void exampleFromAssignment() {
+    MainMethodResult result = invokeStudentMain("Dale", "male", "3.64", "Algortihms", "Operating Systems", "Java");
+    assertThat(result.getExitCode(), equalTo(0));
+    assertThat(result.getOut(), containsString("Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, Operating Systems, and Java.  He says \"This class is too much work\".\")"));
+
   }
 }
