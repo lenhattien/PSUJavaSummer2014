@@ -52,7 +52,7 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    return getName() + "has a GPA of " + getGpa() + " and is taking " + formatClasses().size() +
+    return getName() + " has a GPA of " + getGpa() + " and is taking " + this.classes.size() +
       " classes: " + formatClasses() + ". " + getGenderPronoun() + " says \"" + says() + "\".";
   }
 
@@ -60,8 +60,12 @@ public class Student extends Human {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < this.classes.size(); i++) {
       sb.append(this.classes.get(i));
-      if (i < this.classes.size() - 1){
+      if (i < this.classes.size() - 1) {
         sb.append(", ");
+      }
+
+      if (i == this.classes.size() - 2) {
+        sb.append("and ");
       }
     }
     return sb.toString();
@@ -82,7 +86,11 @@ public class Student extends Human {
     String name = args[0];
     String gender = validateGender(args[1]);
     double gpa = validateGpa(args[2]);
-    ArrayList classes = new ArrayList();
+
+    ArrayList<String> classes = new ArrayList<>();
+    for (int i = 3; i < args.length; i++) {
+      classes.add(args[i]);
+    }
 
     Student student = new Student(name, classes, gpa, gender);
     System.out.println(student.toString());
