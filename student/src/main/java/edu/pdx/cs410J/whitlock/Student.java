@@ -52,8 +52,7 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    return getName() + "has a GPA of " + getGpa() + " and is taking " + formatClasses().size() +
-      " classes: " + formatClasses() + ". " + getGenderPronoun() + " says \"" + says() + "\".";
+    return null;
   }
 
   private String formatClasses() {
