@@ -14,10 +14,13 @@ public class Student extends Human {
   public static final String INVALID_GPA = "GPA must be a number between 0.0 and 4.0";
   public static final String INVALID_GENDER = "Invalid gender";
 
+  public final double gpa;
+
+  /*
   private final List classes;
   private double gpa;
   private String gender;
-
+  */
   /**
    * Creates a new <code>Student</code>                                             
    *                                                                                
@@ -31,13 +34,9 @@ public class Student extends Human {
    * @param gender                                                                  
    *        The student's gender ("male" or "female", case insensitive)             
    */                                                                               
-  public Student(String name, ArrayList classes, double gpa, String gender) {
+  public Student(String name,  String gender, double gpa, ArrayList classes) {
     super(name);
-    /*
-    this.classes = classes;
     this.gpa = gpa;
-    this.gender = gender;
-    */
   }
 
   /**                                                                               
@@ -45,7 +44,7 @@ public class Student extends Human {
    */
   @Override
   public String says() {                                                            
-    return "This class is too much work" ;
+    return null;
   }
                                                                                     
   /**                                                                               
@@ -53,19 +52,10 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    return this.name;
+    return this.name + " has a GPA of " + this.gpa;
   }
 
-  private String formatClasses() {
-    StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < this.classes.size(); i++) {
-      sb.append(this.classes.get(i));
-      if (i < this.classes.size() - 1){
-        sb.append(", ");
-      }
-    }
-    return sb.toString();
-  }
+
 
   /**
    * Main program that parses the command line, creates a
@@ -75,19 +65,16 @@ public class Student extends Human {
    * @param args command line arguments
    */
   public static void main(String[] args) {
-      if (args.length < 3) {
+      if (args.length < 6) {
         printUsageAndExit("Not enough command line arguments");
       }
 
-    String name = args[0];
+
     String gender = validateGender(args[1]);
     double gpa = validateGpa(args[2]);
-    ArrayList classes = new ArrayList();
-
-    Student student = new Student(name, classes, gpa, gender);
-    System.out.println(student.toString());
 
     System.exit(0);
+
   }
 
   /**
@@ -130,15 +117,4 @@ public class Student extends Human {
     return gender;
   }
 
-  public double getGpa() {
-    return gpa;
-  }
-
-  public String getGenderPronoun() {
-    if (gender.equalsIgnoreCase("male")) {
-      return "He";
-    }else {
-      return "She";
-    }
-  }
 }
