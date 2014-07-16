@@ -70,7 +70,22 @@ public class Student extends Human {
 
     if (this.classes.size() > 0) {
       sb.append(": ");
-      sb.append(this.classes.get(0));
+
+      for (int i = 0; i < this.classes.size(); i++) {
+        sb.append(this.classes.get(i));
+
+        if (i < this.classes.size() - 2) {
+          sb.append(", ");
+        }
+
+        if (i == this.classes.size() - 2) {
+          sb.append(" and ");
+        }
+
+
+
+      }
+
     }
     sb.append(".");
     return sb.toString();
