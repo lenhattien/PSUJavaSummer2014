@@ -182,6 +182,18 @@ public class StudentTest extends InvokeMainTestCase
     assertThat(student.toString(), containsString("is taking 4 classes: Java, Operating Systems, Compilers and Poetry."));
   }
 
+  @Test
+  public void toStringWithFemaleStudentContainsShePronoun() {
+    Student student = new Student("Name", "female", 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString("She says"));
+  }
+
+  @Test
+  public void toStringWithFemaleStudentContainsHePronoun() {
+    Student student = new Student("Name", "male", 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString("He says"));
+  }
+
   @Ignore
   @Test
   public void commandLineExampleFromAssignment() {
