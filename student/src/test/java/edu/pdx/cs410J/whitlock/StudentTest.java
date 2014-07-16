@@ -5,6 +5,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static edu.pdx.cs410J.whitlock.Student.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -134,21 +135,33 @@ public class StudentTest extends InvokeMainTestCase
   @Test
   public void toStringContainsStudentName() {
     String name = "Name";
-    Student student = new Student(name, "male", 3.45, new ArrayList());
+    Student student = new Student(name, "male", 3.45, new ArrayList<String>());
     assertThat(student.toString(), containsString(name));
   }
 
   @Test
   public void toStringContainsGpa() {
     double gpa = 3.45;
-    Student student = new Student("Name", "male", gpa, new ArrayList());
+    Student student = new Student("Name", "male", gpa, new ArrayList<String>());
     assertThat(student.toString(), containsString(String.valueOf(gpa)));
   }
 
   @Test
   public void toStringContainsNameAndGpa() {
-    Student student = new Student("Name", "male", 3.45, new ArrayList());
+    Student student = new Student("Name", "male", 3.45, new ArrayList<String>());
     assertThat(student.toString(), containsString(String.valueOf("Name has a GPA of 3.45")));
+  }
+
+  @Test
+  public void toStringWithZeroClasses() {
+    Student student = new Student("Name", "male", 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString(String.valueOf("is taking 0 classes.")));
+  }
+
+  @Test
+  public void toStringWithOneClasses() {
+    Student student = new Student("Name", "male", 3.45, Arrays.asList("Java"));
+    assertThat(student.toString(), containsString(String.valueOf("is taking 1 class: Java.")));
   }
 
   @Ignore

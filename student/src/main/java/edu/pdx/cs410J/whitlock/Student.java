@@ -14,7 +14,9 @@ public class Student extends Human {
   public static final String INVALID_GPA = "GPA must be a number between 0.0 and 4.0";
   public static final String INVALID_GENDER = "Invalid gender";
 
-  public final double gpa;
+  private final double gpa;
+  private final List<String> classes;
+
 
   /*
   private final List classes;
@@ -34,9 +36,10 @@ public class Student extends Human {
    * @param gender                                                                  
    *        The student's gender ("male" or "female", case insensitive)             
    */                                                                               
-  public Student(String name,  String gender, double gpa, ArrayList classes) {
+  public Student(String name,  String gender, double gpa, List<String> classes) {
     super(name);
     this.gpa = gpa;
+    this.classes = classes;
   }
 
   /**                                                                               
@@ -52,9 +55,26 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    return this.name + " has a GPA of " + this.gpa;
+    return this.name + " has a GPA of " + this.gpa + " and is taking " + formatClasses();
   }
 
+  private String formatClasses() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(this.classes.size());
+
+    if (this.classes.size() == 1) {
+      sb.append(" class");
+    }else {
+      sb.append(" classes");
+    }
+
+    if (this.classes.size() > 0) {
+      sb.append(": ");
+      sb.append(this.classes.get(0));
+    }
+    sb.append(".");
+    return sb.toString();
+  }
 
 
   /**
