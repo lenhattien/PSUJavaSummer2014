@@ -33,10 +33,11 @@ public class Student extends Human {
    */                                                                               
   public Student(String name, ArrayList classes, double gpa, String gender) {
     super(name);
-
+    /*
     this.classes = classes;
     this.gpa = gpa;
     this.gender = gender;
+    */
   }
 
   /**                                                                               
@@ -52,7 +53,7 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    return null;
+    return this.name;
   }
 
   private String formatClasses() {

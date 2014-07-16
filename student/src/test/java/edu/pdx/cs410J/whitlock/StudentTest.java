@@ -4,6 +4,8 @@ import edu.pdx.cs410J.InvokeMainTestCase;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static edu.pdx.cs410J.whitlock.Student.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -130,8 +132,10 @@ public class StudentTest extends InvokeMainTestCase
   }
 
   @Test
-  public void zeroClassesIsValid () {
-    assertThatArgumentsAreValid("name", "male", "3.5");
+  public void toStringContainsStudentName() {
+    String name = "Name";
+    Student student = new Student(name, "male", "3.45", new ArrayList());
+    assertThat(student.toString(), containsString(name));
   }
 
   @Ignore
