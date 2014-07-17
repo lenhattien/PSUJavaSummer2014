@@ -201,14 +201,28 @@ public class StudentTest extends InvokeMainTestCase
     assertThat(student.toString(), containsString("\"This class is too much work\"."));
   }
 
-  @Ignore
+  @Test
+  public void createStudentWithExampleFromAssignment() {
+    Student student = new Student("Dave", MALE, 3.64, Arrays.asList("Algorithms", "Operating Systems", "Java"));
+
+    assertThat(student.toString(), containsString("Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, " +
+      "Operating Systems, and Java.  He says \"This class is too much work\"."));
+
+  }
+
   @Test
   public void commandLineExampleFromAssignment() {
-    MainMethodResult result = invokeStudentMain("Dale", "male", "3.64", "Algorithms", "Operating Systems", "Java");
+    MainMethodResult result = invokeStudentMain("Dave", "male", "3.64", "Algorithms", "Operating Systems", "Java");
 
     assertThat(result.getExitCode(), equalTo(0));
     assertThat(result.getOut(), containsString("Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, " +
-      "Operating Systems, and Java.  He says \"This class is too much work\".\")"));
+      "Operating Systems, and Java.  He says \"This class is too much work\"."));
 
+  }
+
+  @Test
+  public void commandLineWithZeroClassesIsOKay() {
+    MainMethodResult result = invokeStudentMain("Dave", "male", "3.64");
+    assertThat(result.getErr(), result.getExitCode(), equalTo(0));
   }
 }

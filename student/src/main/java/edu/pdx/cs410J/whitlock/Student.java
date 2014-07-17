@@ -90,7 +90,7 @@ public class Student extends Human {
         }
 
         if (i == this.classes.size() - 2) {
-          sb.append(" and ");
+          sb.append(", and ");
         }
 
 
@@ -111,14 +111,21 @@ public class Student extends Human {
    * @param args command line arguments
    */
   public static void main(String[] args) {
-      if (args.length < 6) {
+      if (args.length < 3) {
         printUsageAndExit("Not enough command line arguments");
       }
 
-
-    String gender = validateGender(args[1]);
+    String name = args[0];
+    Gender gender = validateGender(args[1]);
     double gpa = validateGpa(args[2]);
 
+    List<String> classes = new ArrayList<>();
+    for (int i = 3; i < args.length; i++) {
+      classes.add(args[i]);
+    }
+
+    Student student = new Student(name, gender, gpa, classes);
+    System.out.println(student.toString());
     System.exit(0);
 
   }
@@ -155,12 +162,15 @@ public class Student extends Human {
     System.exit(1);
   }
 
-  private static String validateGender(String gender) {
-    if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")) {
+  private static Gender validateGender(String gender) {
+    if (gender.equalsIgnoreCase("male")) {
+      return Gender.MALE;
+    }else if (gender.equalsIgnoreCase("female")) {
+      return Gender.FEMALE;
+    }else {
       printUsageAndExit(INVALID_GENDER);
+      throw new AssertionError("Should not get here");
     }
-
-    return gender;
   }
 
   public enum Gender {
