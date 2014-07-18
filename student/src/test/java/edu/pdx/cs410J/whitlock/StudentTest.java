@@ -4,7 +4,11 @@ import edu.pdx.cs410J.InvokeMainTestCase;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static edu.pdx.cs410J.whitlock.Student.*;
+import static edu.pdx.cs410J.whitlock.Student.Gender.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.StringContains.containsString;
@@ -130,15 +134,102 @@ public class StudentTest extends InvokeMainTestCase
   }
 
   @Test
-  public void zeroClassesIsValid () {
-    assertThatArgumentsAreValid("name", "male", "3.5");
+  public void toStringContainsStudentName() {
+    String name = "Name";
+    Student student = new Student(name, MALE, 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString(name));
   }
 
   @Test
+  public void toStringContainsGpa() {
+    double gpa = 3.45;
+    Student student = new Student("Name", MALE, gpa, new ArrayList<String>());
+    assertThat(student.toString(), containsString(String.valueOf(gpa)));
+  }
+
+  @Test
+<<<<<<< HEAD
   public void exampleFromAssignment() {
     MainMethodResult result = invokeStudentMain("Dave", "male", "3.64", "Algorithms", "Operating Systems", "Java");
     assertThat(result.getExitCode(), equalTo(0));
     assertThat(result.getOut(), containsString("Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, Operating Systems, and Java. He says \"This class is too much work\"."));
+=======
+  public void toStringContainsNameAndGpa() {
+    Student student = new Student("Name", MALE, 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString(String.valueOf("Name has a GPA of 3.45")));
+  }
 
+  @Test
+  public void toStringWithZeroClasses() {
+    Student student = new Student("Name", MALE, 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString("is taking 0 classes."));
+  }
+
+  @Test
+  public void toStringWithOneClasses() {
+    Student student = new Student("Name", MALE, 3.45, Arrays.asList("Java"));
+    assertThat(student.toString(), containsString("is taking 1 class: Java."));
+  }
+
+  @Test
+  public void toStringWithTwoClasses() {
+    Student student = new Student("Name", MALE, 3.45, Arrays.asList("Java", "Operating Systems"));
+    assertThat(student.toString(), containsString("is taking 2 classes: Java and Operating Systems."));
+  }
+
+  @Test
+  public void toStringWithThreeClasses() {
+    Student student = new Student("Name", MALE, 3.45, Arrays.asList("Java", "Operating Systems", "Compilers"));
+    assertThat(student.toString(), containsString("is taking 3 classes: Java, Operating Systems and Compilers."));
+  }
+
+  @Test
+  public void toStringWithFourClasses() {
+    Student student = new Student("Name", MALE, 3.45, Arrays.asList("Java", "Operating Systems", "Compilers", "Poetry"));
+    assertThat(student.toString(), containsString("is taking 4 classes: Java, Operating Systems, Compilers and Poetry."));
+  }
+
+  @Test
+  public void toStringWithFemaleStudentContainsShePronoun() {
+    Student student = new Student("Name", FEMALE, 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString("She says"));
+  }
+
+  @Test
+  public void toStringWithFemaleStudentContainsHePronoun() {
+    Student student = new Student("Name", MALE, 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString("He says"));
+  }
+
+  @Test
+  public void allStudentsSayThisClassIsTooMuchWorkToString() {
+    Student student = new Student("Name", MALE, 3.45, new ArrayList<String>());
+    assertThat(student.toString(), containsString("\"This class is too much work\"."));
+  }
+
+  @Test
+  public void createStudentWithExampleFromAssignment() {
+    Student student = new Student("Dave", MALE, 3.64, Arrays.asList("Algorithms", "Operating Systems", "Java"));
+
+    assertThat(student.toString(), containsString("Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, " +
+      "Operating Systems, and Java.  He says \"This class is too much work\"."));
+
+  }
+
+  @Test
+  public void commandLineExampleFromAssignment() {
+    MainMethodResult result = invokeStudentMain("Dave", "male", "3.64", "Algorithms", "Operating Systems", "Java");
+
+    assertThat(result.getExitCode(), equalTo(0));
+    assertThat(result.getOut(), containsString("Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, " +
+      "Operating Systems, and Java.  He says \"This class is too much work\"."));
+
+  }
+>>>>>>> tdd-done-better
+
+  @Test
+  public void commandLineWithZeroClassesIsOKay() {
+    MainMethodResult result = invokeStudentMain("Dave", "male", "3.64");
+    assertThat(result.getErr(), result.getExitCode(), equalTo(0));
   }
 }
