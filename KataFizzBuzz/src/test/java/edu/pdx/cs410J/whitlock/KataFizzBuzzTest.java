@@ -74,6 +74,30 @@ public class KataFizzBuzzTest {
   */
 
   @Test
+  public void numberThreeReturnFizz(){
+    String result = KataFizzBuzz.convertToFizzBuzz(3);
+    assertEquals(result, "Fizz");
+  }
+
+  @Test
+  public void numberFourReturn4(){
+    String result = KataFizzBuzz.convertToFizzBuzz(4);
+    assertEquals(result, "4");
+  }
+
+  @Test
+  public void numberFiveReturnBuzz(){
+    String result = KataFizzBuzz.convertToFizzBuzz(5);
+    assertEquals(result, "Buzz");
+  }
+
+  @Test
+  public void numberFifteenReturnFizzBuzz(){
+    String result = KataFizzBuzz.convertToFizzBuzz(15);
+    assertEquals(result, "FizzBuzz");
+  }
+
+  @Test
   public void printAlsoFizzBuzzAtMultipleOfThreeAndFiveInRangeOneToOneHundred(){
 
     String[] numberArray = new String[100];
