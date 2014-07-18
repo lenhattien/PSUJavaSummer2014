@@ -148,12 +148,6 @@ public class StudentTest extends InvokeMainTestCase
   }
 
   @Test
-<<<<<<< HEAD
-  public void exampleFromAssignment() {
-    MainMethodResult result = invokeStudentMain("Dave", "male", "3.64", "Algorithms", "Operating Systems", "Java");
-    assertThat(result.getExitCode(), equalTo(0));
-    assertThat(result.getOut(), containsString("Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, Operating Systems, and Java. He says \"This class is too much work\"."));
-=======
   public void toStringContainsNameAndGpa() {
     Student student = new Student("Name", MALE, 3.45, new ArrayList<String>());
     assertThat(student.toString(), containsString(String.valueOf("Name has a GPA of 3.45")));
@@ -174,19 +168,19 @@ public class StudentTest extends InvokeMainTestCase
   @Test
   public void toStringWithTwoClasses() {
     Student student = new Student("Name", MALE, 3.45, Arrays.asList("Java", "Operating Systems"));
-    assertThat(student.toString(), containsString("is taking 2 classes: Java and Operating Systems."));
+    assertThat(student.toString(), containsString("is taking 2 classes: Java, and Operating Systems."));
   }
 
   @Test
   public void toStringWithThreeClasses() {
     Student student = new Student("Name", MALE, 3.45, Arrays.asList("Java", "Operating Systems", "Compilers"));
-    assertThat(student.toString(), containsString("is taking 3 classes: Java, Operating Systems and Compilers."));
+    assertThat(student.toString(), containsString("is taking 3 classes: Java, Operating Systems, and Compilers."));
   }
 
   @Test
   public void toStringWithFourClasses() {
     Student student = new Student("Name", MALE, 3.45, Arrays.asList("Java", "Operating Systems", "Compilers", "Poetry"));
-    assertThat(student.toString(), containsString("is taking 4 classes: Java, Operating Systems, Compilers and Poetry."));
+    assertThat(student.toString(), containsString("is taking 4 classes: Java, Operating Systems, Compilers, and Poetry."));
   }
 
   @Test
@@ -225,11 +219,9 @@ public class StudentTest extends InvokeMainTestCase
       "Operating Systems, and Java.  He says \"This class is too much work\"."));
 
   }
->>>>>>> tdd-done-better
 
   @Test
   public void commandLineWithZeroClassesIsOKay() {
-    MainMethodResult result = invokeStudentMain("Dave", "male", "3.64");
-    assertThat(result.getErr(), result.getExitCode(), equalTo(0));
+    assertThatArgumentsAreValid("name", "male", "3.5");
   }
 }

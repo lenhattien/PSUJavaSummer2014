@@ -57,10 +57,6 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-<<<<<<< HEAD
-    return getName() + " has a GPA of " + getGpa() + " and is taking " + this.classes.size() +
-      " classes: " + formatClasses() + ". " + getGenderPronoun() + " says \"" + says() + "\".";
-=======
     return this.name + " has a GPA of " + this.gpa + " and is taking " + formatClasses() + "  "
       + genderPronoun() + " says \"" + says() + "\".";
   }
@@ -71,22 +67,10 @@ public class Student extends Human {
     }else {
       return "He";
     }
->>>>>>> tdd-done-better
   }
 
   private String formatClasses() {
     StringBuilder sb = new StringBuilder();
-<<<<<<< HEAD
-    for (int i = 0; i < this.classes.size(); i++) {
-      sb.append(this.classes.get(i));
-      if (i < this.classes.size() - 1) {
-        sb.append(", ");
-      }
-
-      if (i == this.classes.size() - 2) {
-        sb.append("and ");
-      }
-=======
     sb.append(this.classes.size());
 
     if (this.classes.size() == 1) {
@@ -113,7 +97,6 @@ public class Student extends Human {
 
       }
 
->>>>>>> tdd-done-better
     }
     sb.append(".");
     return sb.toString();
@@ -135,14 +118,6 @@ public class Student extends Human {
     String name = args[0];
     Gender gender = validateGender(args[1]);
     double gpa = validateGpa(args[2]);
-<<<<<<< HEAD
-
-    ArrayList<String> classes = new ArrayList<>();
-    for (int i = 3; i < args.length; i++) {
-      classes.add(args[i]);
-    }
-=======
->>>>>>> tdd-done-better
 
     List<String> classes = new ArrayList<>();
     for (int i = 3; i < args.length; i++) {
