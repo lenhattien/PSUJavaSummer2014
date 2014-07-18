@@ -9,23 +9,12 @@
     <description>Example Java Code for CS410J: Advanced Java Programming at Portland State University</description>
     <url>http://www.cs.pdx.edu/~whitlock</url>
     <modules>
-        <module>examples</module>
-        <module>web</module>
-        <module>projects</module>
-        <module>family</module>
-        <module>grader</module>
-        <module>gwt-parent</module>
-        <module>apptbook-archetype</module>
-        <module>apptbook-web-archetype</module>
-        <module>apptbook-gwt-archetype</module>
-        <module>airline-archetype</module>
-        <module>airline-web-archetype</module>
-        <module>airline-gwt-archetype</module>
-        <module>phonebill-archetype</module>
-        <module>phonebill-web-archetype</module>
-        <module>phonebill-gwt-archetype</module>
-        <module>java-koans-archetype</module>
-        <module>student-archetype</module>
+        <module>airline</module>
+        <module>CheckKata</module>
+        <module>KataFizzBuzz</module>
+        <module>KataRomanNumerals</module>
+        <module>koans</module>
+        <module>student</module>
     </modules>
     <inceptionYear>2000</inceptionYear>
     <organization>
@@ -34,14 +23,14 @@
     </organization>
     <developers>
         <developer>
-            <id>whitlock</id>
-            <name>David Whitlock</name>
-            <email>whitlock@cs.pdx.edu</email>
-            <url>http://www.cs.pdx.edu/~whitlock</url>
+            <id>lenhattien</id>
+            <name>Tien Le</name>
+            <email>letien@cs.pdx.edu</email>
+            <url>http://www.cs.pdx.edu/~letien</url>
             <organization>PSU Department of Computer Science</organization>
             <organizationUrl>http://www.cs.pdx.edu</organizationUrl>
             <roles>
-                <role>Professor</role>
+                <role>Graduate Assistant</role>
             </roles>
             <timezone>-7</timezone>
         </developer>
